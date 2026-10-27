@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: inbox_outbox
+      POSTGRES_PASSWORD: inbox_outbox
+      POSTGRES_DB: inbox_outbox
+    ports:
+      - "55442:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U inbox_outbox -d inbox_outbox"]
+      interval: 1s
+      timeout: 3s
+      retries: 20
+
